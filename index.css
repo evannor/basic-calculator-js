@@ -1,4 +1,22 @@
-body {
-  background: lightslategray;
-  font-size: large;
+.container {
+  margin: 10% 10%;
+}
+.calculator {
+  height: 600px;
+  width: 400px;
+  background-color: #b9c6d2;
+  margin: 0 auto;
+  border: #000 1px solid;
+  border-radius: 5px;
+  position: relative;
+}
+
+textarea {
+  position: relative;
+  top: 10px;
+  left: 13px;
+  text-align: end;
+  border: #000 1px solid;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
