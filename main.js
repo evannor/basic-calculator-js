@@ -1,5 +1,6 @@
 // Create global input variable
 let inputValue;
+let outputFormula = "";
 
 // Create calculator buttons
 let buttonArray = ["Clear", "( )", "%", "/", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "="];
@@ -28,10 +29,11 @@ for (i = 0; i < buttonArray.length; i++) {
   // Button functionality
   switch (btnPressed) {
     case "Clear":
-      console.log("Clear input field");
+      clearInput();
       break;
     case "( )":
-      console.log("Add ( )");
+      changeOutput(inputValue, "( )");
+      console.log(outputFormula);
       break;
     case "%":
       console.log("Make it a percentage");
@@ -56,7 +58,6 @@ for (i = 0; i < buttonArray.length; i++) {
       break;
   
     default:
-      console.log("Just a regular number");
       inputValue = parseInt(btnPressed);
       document.getElementById("screen").value += inputValue;
       break;
