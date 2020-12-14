@@ -13,15 +13,53 @@ for(i = 0; i < buttonArray.length; i++) {
 
 // Button event listeners
 for (i = 0; i < buttonArray.length; i++) {
-  document.getElementById(buttonArray[i]).addEventListener("click", btnClick);
-}
-
-// Called once a button in clicked
-function btnClick() {
+  document.getElementById(buttonArray[i]).addEventListener("click", function(props){
+  let screenValue = document.getElementById("screen").value;
   // Check for and save input
-  if (document.getElementById("screen").value === "0") {
+  if (screenValue === "") {
     inputValue = 0;
   } else {
-    inputValue = document.getElementById("screen").value;
+    inputValue = screenValue;
   }
+
+  // Check which button is pressed
+  let btnPressed = props.target.id;
+  
+  // Button functionality
+  switch (btnPressed) {
+    case "Clear":
+      console.log("Clear input field");
+      break;
+    case "( )":
+      console.log("Add ( )");
+      break;
+    case "%":
+      console.log("Make it a percentage");
+      break;
+    case "/":
+      console.log("Divide these numbers");
+      break;
+    case "X":
+      console.log("Multiply these numbers");
+      break;
+    case "-":
+      console.log("Subtract these numbers");
+      break;
+    case "+":
+      console.log("Add these numbers");
+      break;
+    case ".":
+      console.log("Throw in that decimal");
+      break;
+    case "=":
+      console.log("Complete the equation");
+      break;
+  
+    default:
+      console.log("Just a regular number");
+      inputValue = parseInt(btnPressed);
+      document.getElementById("screen").value += inputValue;
+      break;
+  }
+  });
 }
