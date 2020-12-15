@@ -3,7 +3,7 @@ let inputValue;
 let outputFormula = "";
 
 // Create calculator buttons
-let buttonArray = ["Clear", "( )", "%", "/", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "="];
+let buttonArray = ["Clear", "( )", "%", "/", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "CE", "0", ".", "="];
 for(i = 0; i < buttonArray.length; i++) {
   let btn = document.createElement("button");
   btn.innerText = buttonArray[i];
@@ -30,25 +30,30 @@ for (i = 0; i < buttonArray.length; i++) {
   switch (btnPressed) {
     case "Clear":
       clearInput();
+      inputValue = 0;
       break;
     case "( )":
-      changeOutput(inputValue, "( )");
+      addParenthesis(inputValue);
       console.log(outputFormula);
       break;
     case "%":
-      console.log("Make it a percentage");
+      percentage(inputValue);
+      console.log(outputFormula);
       break;
     case "/":
-      console.log("Divide these numbers");
+      divide(inputValue);
       break;
     case "X":
-      console.log("Multiply these numbers");
+      multiply(inputValue);
       break;
     case "-":
-      console.log("Subtract these numbers");
+      subtract(inputValue);
       break;
     case "+":
-      console.log("Add these numbers");
+      add(inputValue);
+      break;
+    case "CE":
+      console.log("Clear the output formula");
       break;
     case ".":
       console.log("Throw in that decimal");
