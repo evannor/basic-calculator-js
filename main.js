@@ -41,19 +41,21 @@ for (i = 0; i < buttonArray.length; i++) {
       console.log(outputFormula);
       break;
     case "/":
-      divide(inputValue);
+      divide(inputValue, "/");
       break;
     case "X":
-      multiply(inputValue);
+      multiply(inputValue, "X");
       break;
     case "-":
-      subtract(inputValue);
+      subtract(inputValue, "-");
       break;
     case "+":
-      add(inputValue);
+      add(inputValue, "+");
       break;
     case "CE":
-      console.log("Clear the output formula");
+      clearInput();
+      inputValue = 0;
+      outputFormula= "";
       break;
     case ".":
       console.log("Throw in that decimal");

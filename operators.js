@@ -31,37 +31,10 @@ function percentage(input) {
   }
 }
 
-function divide(input) {
+function arithmetic (input, operator) {
   calcInput = {
     lastValue: input,
-    operator: "/"
-  };
-  inputArray.push(calcInput);
-  clearInput();
-}
-
-function multiply (input) {
-  calcInput = {
-    lastValue: input,
-    operator: "X"
-  };
-  inputArray.push(calcInput);
-  clearInput();
-}
-
-function subtract (input) {
-  calcInput = {
-    lastValue: input,
-    operator: "-"
-  };
-  inputArray.push(calcInput);
-  clearInput();
-}
-
-function add (input) {
-  calcInput = {
-    lastValue: input,
-    operator: "+"
+    operator: operator
   };
   inputArray.push(calcInput);
   clearInput();
