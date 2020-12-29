@@ -41,16 +41,20 @@ for (i = 0; i < buttonArray.length; i++) {
       console.log(outputFormula);
       break;
     case "/":
-      divide(inputValue, "/");
+      arithmetic(inputValue, "/");
+      console.log(outputFormula);
       break;
     case "X":
-      multiply(inputValue, "X");
+      arithmetic(inputValue, "X");
+      console.log(outputFormula);
       break;
     case "-":
-      subtract(inputValue, "-");
+      arithmetic(inputValue, "-");
+      console.log(outputFormula);
       break;
     case "+":
-      add(inputValue, "+");
+      arithmetic(inputValue, "+");
+      console.log(outputFormula);
       break;
     case "CE":
       clearInput();
