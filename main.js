@@ -72,8 +72,8 @@ for (i = 0; i < buttonArray.length; i++) {
       document.getElementById("screen").value = inputValue / Math.pow(10, decimalPlaces);
       break;
     case "=":
-      // console.log("Complete the equation");
       document.getElementById("screen").value = equal(inputValue, "=");
+      console.log(outputFormula += inputValue + " = " + document.getElementById("screen").value);
       break;
   
     default: //gets called when only a number is pressed

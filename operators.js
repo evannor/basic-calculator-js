@@ -48,6 +48,7 @@ function percentage(input) {
   }
 }
 
+// Change when there is already a "=" in the output formula
 function arithmetic (input, operator) {
   // Add information to outputFormula
   calcInput = {
@@ -65,11 +66,10 @@ function equal (input, operator) {
     operator: operator
   };
   inputArray.push(calcInput);
-  console.dir(inputArray);
   // Start at position [0] in input array
   // if operator is not "(", ")", save calcInput and operator
   // complete operation with new number from screenValue
-
+  // CAN USE SPLICE() TO TAKE OUT PORTION OF ARRAY
   // if it is a parentheses, first check that it is "("
   // Send error if ")" is found first
   // Otherwise search forward for ")" and extract objects into new array
@@ -88,7 +88,11 @@ function equal (input, operator) {
         total = inputArray[0].lastValue - inputArray[1].lastValue;
         break;
       case "+":
-        total = inputArray[0].lastValue + inputArray[1].lastValue;
+        total = parseInt(inputArray[0].lastValue) + parseInt(inputArray[1].lastValue);
+        break;
+      case "=":
+        inputArray[1].lastValue = inputArray[0].lastValue;
+        inputArray.splice(0, 1);
         break;
     }
     inputArray[1].lastValue = total;
