@@ -18,6 +18,7 @@ for (i = 0; i < buttonArray.length; i++) {
   let screenValue = document.getElementById("screen").value;
   // Check for and save input
   if (screenValue === "") {
+    // if outputFormula !== "", then complete arithmetic and set as input value --good use of anonymous arrow function
     inputValue = 0;
   } else {
     inputValue = screenValue;
@@ -60,15 +61,22 @@ for (i = 0; i < buttonArray.length; i++) {
       clearInput();
       inputValue = 0;
       outputFormula= "";
+      inputArray = [];
       break;
     case ".":
-      console.log("Throw in that decimal");
+      const decimalPlaces = prompt("How many digits to the right of the decimal?");
+      if (isNaN(decimalPlaces)) {
+        alert("Number of decimal places must be a number.");
+        break;
+      }
+      document.getElementById("screen").value = inputValue / Math.pow(10, decimalPlaces);
       break;
     case "=":
-      console.log("Complete the equation");
+      // console.log("Complete the equation");
+      document.getElementById("screen").value = equal(inputValue, "=");
       break;
   
-    default:
+    default: //gets called when only a number is pressed
       inputValue = parseInt(btnPressed);
       document.getElementById("screen").value += inputValue;
       break;
