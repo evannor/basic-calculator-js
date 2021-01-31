@@ -1,19 +1,20 @@
 let calcInput;
-let inputArray= [];
+let inputArray = [];
+const outputHistory = [];
 
 function clearInput() {
-  return document.getElementById("screen").value = "";
+  return (document.getElementById("screen").value = "");
 }
 
 // Need functionality for adding multiple () together
-function addParenthesis (input) {
+function addParenthesis(input) {
   // Add parenthesis to outputFormula
   if (input === 0 && outputFormula === "") {
     outputFormula = " ( ";
     calcInput = {
       lastValue: input,
-      operator: " ( "
-    }
+      operator: " ( ",
+    };
     inputArray.push(calcInput);
     clearInput();
   } else {
@@ -21,16 +22,16 @@ function addParenthesis (input) {
       outputFormula += input + " ) ";
       calcInput = {
         lastValue: input,
-        operator: " ) "
-      }
+        operator: " ) ",
+      };
       inputArray.push(calcInput);
       clearInput();
     } else {
       outputFormula += " ( " + input;
       calcInput = {
         lastValue: input,
-        operator: " ( "
-      }
+        operator: " ( ",
+      };
       inputArray.push(calcInput);
       clearInput();
     }
@@ -43,29 +44,40 @@ function percentage(input) {
     // Exits function if input is 0
     return console.log("Number must not be 0.");
   } else {
-     outputFormula += (input / 100);
-     document.getElementById("screen").value = (input / 100);
+    outputFormula += input / 100;
+    document.getElementById("screen").value = input / 100;
   }
 }
 
 // Change when there is already a "=" in the output formula
-function arithmetic (input, operator) {
+function arithmetic(input, operator) {
+  if (inputArray.length === 1 && inputArray[0].operator === "=") {
+    // don't want to clear outputFormula unless CE is pressed
+    // save previous formula
+    outputHistory.push({ outputFormula });
+    outputFormula = [];
+    // Need to add space to screen to show outputHistory
+  }
+
   // Add information to outputFormula
   calcInput = {
     lastValue: input,
-    operator: operator
+    operator: operator,
   };
   inputArray.push(calcInput);
   outputFormula += input + " " + operator + " ";
   clearInput();
 }
 
-function equal (input, operator) {
+function equal(input, operator) {
   calcInput = {
     lastValue: input,
-    operator: operator
+    operator: operator,
   };
   inputArray.push(calcInput);
+  if (inputArray[0].operator === "=") {
+    inputArray.shift();
+  }
   // Start at position [0] in input array
   // if operator is not "(", ")", save calcInput and operator
   // complete operation with new number from screenValue
@@ -74,7 +86,7 @@ function equal (input, operator) {
   // Send error if ")" is found first
   // Otherwise search forward for ")" and extract objects into new array
   // Perform operations in new array and then return to original array
-  // if no (), then 
+  // if no (), then
   let total;
   do {
     switch (inputArray[0].operator) {
@@ -88,7 +100,8 @@ function equal (input, operator) {
         total = inputArray[0].lastValue - inputArray[1].lastValue;
         break;
       case "+":
-        total = parseInt(inputArray[0].lastValue) + parseInt(inputArray[1].lastValue);
+        total =
+          parseInt(inputArray[0].lastValue) + parseInt(inputArray[1].lastValue);
         break;
       case "=":
         inputArray[1].lastValue = inputArray[0].lastValue;
@@ -97,6 +110,6 @@ function equal (input, operator) {
     }
     inputArray[1].lastValue = total;
     inputArray.splice(0, 1);
-  } while(inputArray.length > 1);
+  } while (inputArray.length > 1);
   return inputArray[0].lastValue;
 }
