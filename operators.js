@@ -1,6 +1,7 @@
 let calcInput;
 let inputArray = [];
 const outputHistory = [];
+const historyDiv = document.getElementById("outputHistory");
 
 function clearInput() {
   return (document.getElementById("screen").value = "");
@@ -56,8 +57,13 @@ function arithmetic(input, operator) {
     outputHistory.push({ outputFormula });
     outputFormula = [];
     // Need to add space to screen to show outputHistory
+    historyDiv.innerHTML = "";
+    outputHistory.map((entry) => {
+      const infoEntry = document.createElement("p");
+      infoEntry.innerText = entry.outputFormula;
+      historyDiv.appendChild(infoEntry);
+    });
   }
-
   // Add information to outputFormula
   calcInput = {
     lastValue: input,

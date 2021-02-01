@@ -1,6 +1,7 @@
 // Create global input variable
 let inputValue;
 let outputFormula = "";
+const outputDiv = document.getElementById("outputFormula");
 
 // Create calculator buttons
 let buttonArray = [
@@ -57,28 +58,37 @@ for (i = 0; i < buttonArray.length; i++) {
           inputValue = 0;
           break;
         case "( )":
-          addParenthesis(inputValue);
-          console.log(outputFormula);
+          alert(
+            "Paranthese are currently in development! Try writing the equation without them, the Calculator will still follow PEMDAS."
+          );
+          // addParenthesis(inputValue);
+          // console.log(outputFormula);
+          // outputDiv.innerText = outputFormula;
           break;
         case "%":
           percentage(inputValue);
           console.log(outputFormula);
+          outputDiv.innerText = outputFormula;
           break;
         case "/":
           arithmetic(inputValue, "/");
           console.log(outputFormula);
+          outputDiv.innerText = outputFormula;
           break;
         case "X":
           arithmetic(inputValue, "X");
           console.log(outputFormula);
+          outputDiv.innerText = outputFormula;
           break;
         case "-":
           arithmetic(inputValue, "-");
           console.log(outputFormula);
+          outputDiv.innerText = outputFormula;
           break;
         case "+":
           arithmetic(inputValue, "+");
           console.log(outputFormula);
+          outputDiv.innerText = outputFormula;
           break;
         case "CE":
           clearInput();
@@ -86,6 +96,8 @@ for (i = 0; i < buttonArray.length; i++) {
           outputFormula = "";
           inputArray = [];
           outputHistory.length = 0;
+          outputDiv.innerText = outputFormula;
+          historyDiv.innerText = outputHistory;
           break;
         case ".":
           const decimalPlaces = prompt(
@@ -104,6 +116,7 @@ for (i = 0; i < buttonArray.length; i++) {
             (outputFormula +=
               inputValue + " = " + document.getElementById("screen").value)
           );
+          outputDiv.innerText = outputFormula;
           break;
 
         default:
