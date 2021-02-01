@@ -49,7 +49,6 @@ function percentage(input) {
   }
 }
 
-// Change when there is already a "=" in the output formula
 function arithmetic(input, operator) {
   if (inputArray.length === 1 && inputArray[0].operator === "=") {
     // don't want to clear outputFormula unless CE is pressed
@@ -78,38 +77,51 @@ function equal(input, operator) {
   if (inputArray[0].operator === "=") {
     inputArray.shift();
   }
-  // Start at position [0] in input array
-  // if operator is not "(", ")", save calcInput and operator
-  // complete operation with new number from screenValue
-  // CAN USE SPLICE() TO TAKE OUT PORTION OF ARRAY
-  // if it is a parentheses, first check that it is "("
-  // Send error if ")" is found first
-  // Otherwise search forward for ")" and extract objects into new array
-  // Perform operations in new array and then return to original array
-  // if no (), then
+  const answer = pemdasSort(inputArray);
+  return answer;
+}
+
+// currently searches provided array and completes multiplication and division first
+function pemdasSort(array) {
+  // if more than 2, find X or /, complete first, add equalObj back to array, sort more or finish aritmetic after
+  do {
+    // If only 2 items, no need to sort
+    if (array.length < 3) {
+      equalExecution(array);
+      return array[0].lastValue;
+    }
+    const elIndex = array.findIndex(
+      (entry) => entry.operator === "X" || entry.operator === "/"
+    );
+    const tempArray = array.splice(elIndex, 2);
+    const equalObj = equalExecution(tempArray);
+    array.splice(elIndex, 0, ...equalObj);
+  } while (array.length > 1);
+}
+
+function equalExecution(array) {
   let total;
   do {
-    switch (inputArray[0].operator) {
+    switch (array[0].operator) {
       case "/":
-        total = inputArray[0].lastValue / inputArray[1].lastValue;
+        total = array[0].lastValue / array[1].lastValue;
         break;
       case "X":
-        total = inputArray[0].lastValue * inputArray[1].lastValue;
+        total = array[0].lastValue * array[1].lastValue;
         break;
       case "-":
-        total = inputArray[0].lastValue - inputArray[1].lastValue;
+        total = array[0].lastValue - array[1].lastValue;
         break;
       case "+":
-        total =
-          parseInt(inputArray[0].lastValue) + parseInt(inputArray[1].lastValue);
+        total = parseInt(array[0].lastValue) + parseInt(array[1].lastValue);
         break;
       case "=":
-        inputArray[1].lastValue = inputArray[0].lastValue;
-        inputArray.splice(0, 1);
+        array[1].lastValue = array[0].lastValue;
+        array.splice(0, 1);
         break;
     }
-    inputArray[1].lastValue = total;
-    inputArray.splice(0, 1);
-  } while (inputArray.length > 1);
-  return inputArray[0].lastValue;
+    array[1].lastValue = total;
+    array.splice(0, 1);
+  } while (array.length > 1);
+  return array;
 }

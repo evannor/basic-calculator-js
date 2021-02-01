@@ -47,7 +47,7 @@ for (i = 0; i < buttonArray.length; i++) {
         inputValue = screenValue;
       }
 
-      // Check which button is pressed
+      // Check and save which button is pressed
       let btnPressed = props.target.id;
 
       // Button functionality
