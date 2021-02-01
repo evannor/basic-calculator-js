@@ -8,13 +8,20 @@
 </head>
 <body>
   <div class="container">
+    <h1>Basic Calculator</h1>
     <section class="calculator">
       <input name="calc-screen" id="screen" type="number" value=""></input>
       <div id="btn-area"></div>
     </section>
-    <section>
-      <div id="outputFormula"></div>
-      <div id="outputHistory"></div>
+    <section class="output">
+      <div class="current">
+        <h3>Current Equation</h3>
+        <div id="outputFormula"></div>
+      </div>
+      <div class="history">
+        <h3>History</h3>
+        <div id="outputHistory"></div>
+      </div>
     </section>
   </div>
   <script src="main.js"></script>
